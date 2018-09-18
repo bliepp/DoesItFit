@@ -48,10 +48,10 @@ class Box():
 
 print("The Cupboard\n############")
 cupboard = Cupboard(
-        int(input("Height:      ")),
-        int(input("Width:       ")),
-        int(input("Lower Depth: ")),
-        int(input("Upper Depth: "))
+        float(input("Height:      ")),
+        float(input("Width:       ")),
+        float(input("Lower Depth: ")),
+        float(input("Upper Depth: "))
     )
 
 print("\nWhats the maximum possible box volume?")
@@ -68,9 +68,9 @@ print("")
 while(True):
     print("Box Dimensions\n##############")
     box = Box(
-            int(input("Height:      ")),
-            int(input("Width:       ")),
-            int(input("Depth:       "))
+            float(input("Height:      ")),
+            float(input("Width:       ")),
+            float(input("Depth:       "))
         )
     
     if box.fit(cupboard):
