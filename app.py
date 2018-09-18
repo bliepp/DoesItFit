@@ -34,14 +34,12 @@ class Box():
         self.depth = depth
     
     def fit(self, cupboard):
-        if (self.width > cupboard.width and
-                self.depth > cupboard.width):
-            return False
-        elif (self.height > cupboard.height_at(self.depth) and
-                self.height > cupboard.height_at(self.width)):
-            return False
+        if ( (self.width < cupboard.width and self.height < cupboard.height_at(self.depth)) or
+             (self.depth < cupboard.width and self.height < cupboard.height_at(self.width)) ):
+                return True
         else:
-            return True
+            return False
 
 c = Cupboard(26,50,54,32)
-b = Box(31.9,50,27)
+b = Box(11,49,45)
+print(b.fit(c))
