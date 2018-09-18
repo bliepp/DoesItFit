@@ -36,7 +36,7 @@ class Box():
     def fit(self, cupboard):
         if ( (self.width < cupboard.width and self.height < cupboard.height_at(self.depth)) or
              (self.depth < cupboard.width and self.height < cupboard.height_at(self.width)) ):
-                return True
+            return True
         else:
             return False
 
