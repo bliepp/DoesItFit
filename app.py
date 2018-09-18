@@ -20,11 +20,14 @@ class Cupboard():
     def height_at(self, depth):
         return self.__a * depth + self.__b
     
-    def max(self):
+    def data(self):
         d = -self.__b/(2*self.__a)
-        h = self.height_at(d)
         w = self.width
-        return {"Height": h, "Width": self.width, "Depth": d,"Area": h*d, "Volume": h*w*d}
+        h = self.height_at(d)
+        if h > self.height:
+            d = self.upper
+            h = self.height
+        return {"Height": h, "Width": self.width, "Depth": d, "Angle": self.angle,"Area": h*d, "Volume": h*w*d}
 
 class Box():
     
@@ -34,12 +37,42 @@ class Box():
         self.depth = depth
     
     def fit(self, cupboard):
+        if ( self.height > cupboard.height ):
+            return False
+        
         if ( (self.width < cupboard.width and self.height < cupboard.height_at(self.depth)) or
              (self.depth < cupboard.width and self.height < cupboard.height_at(self.width)) ):
             return True
         else:
             return False
 
-c = Cupboard(26,50,54,32)
-b = Box(11,49,45)
-print(b.fit(c))
+print("The Cupboard\n############")
+cupboard = Cupboard(
+        int(input("Height:      ")),
+        int(input("Width:       ")),
+        int(input("Lower Depth: ")),
+        int(input("Upper Depth: "))
+    )
+
+print("\nThe Box\n#######")
+box = Box(
+        int(input("Height:      ")),
+        int(input("Width:       ")),
+        int(input("Depth:       "))
+    )
+print("\n")
+
+if box.fit(cupboard):
+    print("The box does fit inside the cupboard.")
+else:
+    print("The box does *NOT* fit inside the cupboard.")
+print("\n")
+
+print("Values of the greatest volume:")
+print("height x width x depth: {:.2f} x {:.2f} x {:.2f}".format(
+        cupboard.data()["Height"],
+        cupboard.data()["Width"],
+        cupboard.data()["Depth"])
+    )
+print("volume:                 {:.2f}".format(cupboard.data()["Volume"]))
+print("cut-through area:       {:.2f}".format(cupboard.data()["Area"]))
