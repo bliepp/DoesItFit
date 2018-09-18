@@ -54,25 +54,30 @@ cupboard = Cupboard(
         int(input("Upper Depth: "))
     )
 
-print("\nThe Box\n#######")
-box = Box(
-        int(input("Height:      ")),
-        int(input("Width:       ")),
-        int(input("Depth:       "))
-    )
-print("\n")
-
-if box.fit(cupboard):
-    print("The box does fit inside the cupboard.")
-else:
-    print("The box does *NOT* fit inside the cupboard.")
-print("\n")
-
-print("Values of the greatest volume:")
-print("height x width x depth: {:.2f} x {:.2f} x {:.2f}".format(
+print("\nWhats the maximum possible box volume?")
+print("Height x Width x Depth: {:.2f} x {:.2f} x {:.2f}".format(
         cupboard.data()["Height"],
         cupboard.data()["Width"],
         cupboard.data()["Depth"])
     )
-print("volume:                 {:.2f}".format(cupboard.data()["Volume"]))
-print("cut-through area:       {:.2f}".format(cupboard.data()["Area"]))
+    
+print("Volume:                 {:.2f}".format(cupboard.data()["Volume"]))
+print("Cut-through area:       {:.2f}".format(cupboard.data()["Area"]))
+print("")
+
+while(True):
+    print("Box Dimensions\n##############")
+    box = Box(
+            int(input("Height:      ")),
+            int(input("Width:       ")),
+            int(input("Depth:       "))
+        )
+    
+    if box.fit(cupboard):
+        print("Does it fit? YES!")
+    else:
+        print("Does it fit? NO!")
+    
+    print("\nTo exit type 'exit'. To continue press 'Enter'.")
+    if input().lower() == "exit":
+        break
