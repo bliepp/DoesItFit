@@ -54,7 +54,7 @@ cupboard = Cupboard(
         float(input("Lower Depth: ")),
         float(input("Upper Depth: "))
     )
-print("It is angled by {} degrees".format(
+print("It is angled by {:.2f} degrees".format(
         np.degrees(cupboard.data()["Angle"])
     ))
 
