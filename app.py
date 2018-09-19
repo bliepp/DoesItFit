@@ -54,6 +54,9 @@ cupboard = Cupboard(
         float(input("Lower Depth: ")),
         float(input("Upper Depth: "))
     )
+print("It is angled by {} degrees".format(
+        np.degrees(cupboard.data()["Angle"])
+    ))
 
 print("\nWhats the maximum possible box volume?")
 print("Height x Width x Depth: {:.2f} x {:.2f} x {:.2f}".format(
