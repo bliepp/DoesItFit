@@ -5,7 +5,7 @@
 
 import numpy as np
 
-class Cupboard():
+class Outer():
     
     def __init__(self, height, width, lower, upper):
         self.height = height
@@ -31,9 +31,9 @@ class Cupboard():
         h = self.height_at(d)
         if h >= self.height:
             d = self.upper
-        return {"Height": h, "Width": self.width, "Depth": d, "Angle": self.angle,"Area": h*d, "Volume": h*w*d}
+        return {"height": h, "width": self.width, "depth": d, "angle": self.angle,"area": h*d, "volume": h*w*d}
 
-class Box():
+class Inner():
     
     def __init__(self,height, width, depth):
         self.height = height
@@ -47,41 +47,42 @@ class Box():
         else:
             return False
 
-print("The Cupboard\n############")
-cupboard = Cupboard(
-        float(input("Height:      ")),
-        float(input("Width:       ")),
-        float(input("Lower Depth: ")),
-        float(input("Upper Depth: "))
-    )
-print("It is angled by {:.2f} degrees".format(
-        np.degrees(cupboard.data()["Angle"])
-    ))
-
-print("\nWhats the maximum possible box volume?")
-print("Height x Width x Depth: {:.2f} x {:.2f} x {:.2f}".format(
-        cupboard.data()["Height"],
-        cupboard.data()["Width"],
-        cupboard.data()["Depth"])
-    )
-    
-print("Volume:                 {:.2f}".format(cupboard.data()["Volume"]))
-print("Cut-through area:       {:.2f}".format(cupboard.data()["Area"]))
-print("")
-
-while(True):
-    print("Box Dimensions\n##############")
-    box = Box(
+if __name__ == "__main__":
+    print("The Cupboard\n############")
+    cupboard = Outer(
             float(input("Height:      ")),
             float(input("Width:       ")),
-            float(input("Depth:       "))
+            float(input("Lower Depth: ")),
+            float(input("Upper Depth: "))
+        )
+    print("It is angled by {:.2f} degrees".format(
+            np.degrees(cupboard.data()["angle"])
+        ))
+    
+    print("\nWhats the maximum possible box volume?")
+    print("Height x Width x Depth: {:.2f} x {:.2f} x {:.2f}".format(
+            cupboard.data()["height"],
+            cupboard.data()["width"],
+            cupboard.data()["depth"])
         )
     
-    if box.fit(cupboard):
-        print("Does it fit? YES!")
-    else:
-        print("Does it fit? NO!")
+    print("Volume:                 {:.2f}".format(cupboard.data()["volume"]))
+    print("Cut-through area:       {:.2f}".format(cupboard.data()["area"]))
+    print("")
     
-    print("\nTo exit type 'exit'. To continue press 'Enter'.")
-    if input().lower() == "exit":
-        break
+    while(True):
+        print("Box Dimensions\n##############")
+        box = Inner(
+                float(input("Height:      ")),
+                float(input("Width:       ")),
+                float(input("Depth:       "))
+            )
+        
+        if box.fit(cupboard):
+            print("Does it fit? YES!")
+        else:
+            print("Does it fit? NO!")
+        
+        print("\nTo exit type 'exit'. To continue press 'Enter'.")
+        if input().lower() == "exit":
+            break
