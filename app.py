@@ -14,11 +14,16 @@ class Cupboard():
         self.upper = upper
         self.angle = np.arctan(height/(lower-upper))
         
+        # calculate coefficients for mathematical func
         self.__a = height/(upper-lower)
         self.__b = height*(1 - upper/(upper-lower))
     
     def height_at(self, depth):
-        return self.__a * depth + self.__b
+        # mathematical func that describes the cuboard
+        result = self.__a * depth + self.__b
+        if result > self.height:
+            result = self.height
+        return result
     
     def data(self):
         d = -self.__b/(2*self.__a)
@@ -37,9 +42,6 @@ class Box():
         self.depth = depth
     
     def fit(self, cupboard):
-        if ( self.height > cupboard.height ):
-            return False
-        
         if ( (self.width < cupboard.width and self.height < cupboard.height_at(self.depth)) or
              (self.depth < cupboard.width and self.height < cupboard.height_at(self.width)) ):
             return True
