@@ -29,9 +29,8 @@ class Cupboard():
         d = -self.__b/(2*self.__a)
         w = self.width
         h = self.height_at(d)
-        if h > self.height:
+        if h >= self.height:
             d = self.upper
-            h = self.height
         return {"Height": h, "Width": self.width, "Depth": d, "Angle": self.angle,"Area": h*d, "Volume": h*w*d}
 
 class Box():
